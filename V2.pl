@@ -16,40 +16,45 @@ my $arg2 = $ARGV[1];
 BEGIN:	
 #On recupere la page web avec les prix
 system("phantomjs save_page.js $arg2 > $arg1.html");
-sleep(16);
+sleep(3);
 
 
 #Ensuite on creer notre fichier texte avec le prix et le nom des joueurs : c'était B2 le second grep
 system "w3m -dump $arg1.html | grep -B4 % | grep -B1 \"^( )   \" | grep -v \"-\" > prix$arg1.txt";
-sleep(8);
+sleep(3);
 
 
 #On creer ensuite un autre fichier avec juste les prix
 system("cat prix$arg1.txt  | grep -o '.[0-9]\,[0-9][0-9]' > prixliste$arg1.txt");
-sleep(4);
+sleep(3);
 
 #Lecture du fichier
 system("perl -pe 's/\n/ /g' prixliste$arg1.txt > prixligne$arg1.txt");
 
-my $p1 = `cat prixligne.txt | cut -c1-5 | sed 's/ //g'`;
-my $p2 = `cat prixligne.txt | cut -c7-11 | sed 's/ //g'`;
-my $p3 = `cat prixligne.txt | cut -c13-17 | sed 's/ //g'`;
-my $p4 = `cat prixligne.txt | cut -c19-23 | sed 's/ //g'`;
+my $p1 = `cat prixligne$arg1.txt | cut -c1-5 | sed 's/ //g'`;
+my $p2 = `cat prixligne$arg1.txt | cut -c7-11 | sed 's/ //g'`;
+my $p3 = `cat prixligne$arg1.txt | cut -c13-17 | sed 's/ //g'`;
+my $p4 = `cat prixligne$arg1.txt | cut -c19-23 | sed 's/ //g'`;
+
+print "$p1 , $p2 , $p3 , $p4\n";
 
 #$text=`cat prix.txt `;
 
 #$text=`cat prix.txt | cut -c10-40 | head -n 5`;
 
-system("cat prix.txt | cut -c10-40 | head -n 5 > prix2.txt");
-system("perl -pe 's/\n/ /g' prix2.txt > prix2-ligne.txt");
-system("perl -pe 's/  */%20/g' prix2-ligne.txt > prix20.txt");
-$text=`cat prix20.txt`;
+system("cat prix$arg1.txt | cut -c10-40 | head -n 5 > prix2$arg1.txt");
+system("perl -pe 's/\n/ /g' prix2$arg1.txt > prix2-ligne$arg1.txt");
+system("perl -pe 's/  */%20/g' prix2-ligne$arg1.txt > prix20$arg1.txt");
+$text=`cat prix20$arg1.txt`;
 
 
 chomp $p1;
 chomp $p2;
 chomp $p3;
 chomp $p4;
+
+print "$p1 , $p2 , $p3 , $p4\n";
+
 
                         if ($stop eq 0) {
                         $stop = 1;
