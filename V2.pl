@@ -16,17 +16,17 @@ my $arg2 = $ARGV[1];
 BEGIN:	
 #On recupere la page web avec les prix
 system("phantomjs save_page.js $arg2 > $arg1.html");
-sleep(3);
+sleep(6);
 
 
 #Ensuite on creer notre fichier texte avec le prix et le nom des joueurs : c'était B2 le second grep
 system "w3m -dump $arg1.html | grep -B4 % | grep -B1 \"^( )   \" | grep -v \"-\" > prix$arg1.txt";
-sleep(3);
+sleep(6);
 
 
 #On creer ensuite un autre fichier avec juste les prix
 system("cat prix$arg1.txt  | grep -o '.[0-9]\,[0-9][0-9]' > prixliste$arg1.txt");
-sleep(3);
+sleep(6);
 
 #Lecture du fichier
 system("perl -pe 's/\n/ /g' prixliste$arg1.txt > prixligne$arg1.txt");
@@ -35,9 +35,8 @@ my $p1 = `cat prixligne$arg1.txt | cut -c1-5 | sed 's/ //g'`;
 my $p2 = `cat prixligne$arg1.txt | cut -c7-11 | sed 's/ //g'`;
 my $p3 = `cat prixligne$arg1.txt | cut -c13-17 | sed 's/ //g'`;
 my $p4 = `cat prixligne$arg1.txt | cut -c19-23 | sed 's/ //g'`;
-
-print "$p1 , $p2 , $p3 , $p4\n";
-
+print "Nom du Jeu : $ARGV[0]\n";
+#print "$p1 , $p2 , $p3 , $p4\n";
 #$text=`cat prix.txt `;
 
 #$text=`cat prix.txt | cut -c10-40 | head -n 5`;
@@ -54,6 +53,11 @@ chomp $p3;
 chomp $p4;
 
 print "$p1 , $p2 , $p3 , $p4\n";
+
+if ($p1 eq "") {
+	print "LA VARIABLE EST VIDE\n";
+	goto FIN;
+}
 
 
                         if ($stop eq 0) {
