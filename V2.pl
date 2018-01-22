@@ -64,6 +64,9 @@ if ($p1 eq "") {
                         $stop = 1;
 			$pp = $p1;
 			$align = 1;
+			system("perl format.pl $arg1");
+			system("php historise.php $arg1");
+			system("php Script_Ajout_Prix_BDD.php $arg1");
 			system("perl SmsGen.pl $arg1 Lancement");
                         goto FIN;
 }
