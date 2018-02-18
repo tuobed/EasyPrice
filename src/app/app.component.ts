@@ -6,6 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { TaxesPage } from '../pages/taxes/taxes';
+import {InfoJeuPage} from '../pages/info-jeu/info-jeu';
+import {FormAddPage} from '../pages/form-add/form-add';
+import {FormProvider} from '../providers/form/form';
+
+import { OneSignal } from '@ionic-native/onesignal';
+
 
 
 @Component({
@@ -18,15 +24,30 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private oneSignal: OneSignal) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Nom de vendeur', component: HomePage },
+      { title: 'Accueil', component: HomePage },
       { title: 'Catalogue', component: AboutPage },
-      { title: 'Calcule de taxes', component: TaxesPage }
+      { title: 'Calcule de commissions', component: TaxesPage }
     ];
+
+
+    this.oneSignal.startInit('44d9b5e2-d523-48f7-9c8a-4c68ebb7df57', '914889699420');
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+
+this.oneSignal.endInit();
 
   }
 

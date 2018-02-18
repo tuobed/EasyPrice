@@ -3,29 +3,38 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profil</ion-title>
+    <ion-title>Accueil</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Saisissez votre nom de vendeur
+  <h1>EasyPrice <br></h1>
+
+  <p class="bold">Bienvenue dans EasyPrice !<br><br></p>
+
+  
+  <div text-center>
+  <img src="assets/imgs/imageHomePage.png" height="150" width="300"/>
+  </div>
+  <p></p>
+
+
+
+  <!-- <p><br>Cette application a pour but de vous notifier en temps réel des changements de prix sur les platformes G2A et Kinguin</p> -->
   
 
-  <ion-list>
+  
 
-  <ion-item>
-    <ion-label fixed>Username</ion-label>
-    <ion-input type="text" value=""></ion-input>
+  <p>Nom G2A ou Kinguin</p> 
+  <ion-item class="item item-input item-stacked-label">
+    <span class="input-label">Nom d'utilisateur</span>
+    <ion-input type="text" placeholder="Username"  [(ngModel)]="username" name="prix"></ion-input>      
   </ion-item>
+<div class="btn_valid">  
+    <button ion-button color="secondary" class="btn_valid" (click)="login(username)">LOGIN</button>
+  </div>
 
-  <ion-item>
-    <ion-label fixed>Password</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
 
-</ion-list>
-<div text-center>
-<button [navPush]="aboutPage" ion-button color="dark" clear end>LOGIN</button>
-</div>
+
 
 </ion-content>

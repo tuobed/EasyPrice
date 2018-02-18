@@ -14,14 +14,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 export class HomePage {
 
-	aboutPage = AboutPage;
-	
 
+	constructor(public navCtrl: NavController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
 
-	constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-
-	
+	 
     }
+
+
+    login(username) {
+    	console.log(username);
+    	
+    	this.navCtrl.push(AboutPage, {
+      		utilisateur: username
+    	});
+  	}
 
 
 }

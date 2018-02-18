@@ -9,11 +9,33 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Calcule de taxes</ion-title>
+    <ion-title>Calcule de commissions</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+
+	<p class="bold">Saisissez le prix de vente du jeu<br><br></p>
+
+	<ion-item class="item item-input item-stacked-label">
+		<span class="input-label">Prix de vente du jeu</span>
+		<ion-input type="text" placeholder="Prix de vente eu euros"  [(ngModel)]="prix" name="prix"></ion-input>			
+	</ion-item>
+  <ion-item class="item item-input item-stacked-label">
+    <span class="input-label">Nombre de jeux</span>
+    <ion-input type="text" placeholder="Nombre de jeux"  [(ngModel)]="nombre" name="nombre"></ion-input> 
+  </ion-item>
+	<div class="btn_valid">	 
+		<button ion-button color="secondary" class="btn_valid" (click)="calculTaxe(prix,nombre)">Calculer</button>
+	</div>
+
+
+    <p><br>Après commissions, le prix de revient:<br></p>
+    <h3>{{result}} €</h3>
+
+    <p>Montant de la commission</p>
+    <p>{{difference}}</p>
+    
 
 </ion-content>
